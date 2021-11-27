@@ -5,6 +5,7 @@ import os
 from pico2d import *
 import game_framework
 import game_world
+import collision
 
 from boy import Boy
 from grass import Grass
@@ -73,14 +74,10 @@ def update():
     for game_object in game_world.all_objects():
         game_object.update()
 
-    for ball in balls:
-        if collide(boy, ball):
-            balls.remove(ball)
-            game_world.remove_object(ball)
+    if collide(boy, grass):
+        pass
 
-    for ball in balls:
-        if collide(grass, ball):
-            ball.stop()
+
     #delay(0.9)
 
 def draw():
