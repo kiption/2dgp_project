@@ -13,7 +13,7 @@ class Ball:
 
     def get_bb(self):
         return self.x - 10, self.y - 10, self.x + 10, self.y + 10
-        return 0, 0, 0, 0
+        #return 0, 0, 0, 0
 
     def draw(self):
         self.image.draw(self.x, self.y)
@@ -39,5 +39,6 @@ class BigBall(Ball):
             BigBall.image = load_image('ball41x41.png')
         self.x, self.y = random.randint(0, 1600-1), 500
         self.fall_speed = random.randint(BigBall.MIN_FALL_SPEED, BigBall.MAX_FALL_SPEED)
+
     def get_bb(self):
         return self.x - 20, self.y - 20, self.x + 20, self.y + 20

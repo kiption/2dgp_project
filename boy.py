@@ -133,7 +133,7 @@ class JumpState:
         pass
 
     def do(boy):
-        print(boy.JumpAccel)
+        #print(boy.JumpAccel)
         boy.JumpAccel += game_framework.frame_time
         boy.frame = (boy.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 2
         boy.x += boy.velocity * game_framework.frame_time
@@ -165,14 +165,14 @@ class FallingState:
     def do(boy):
         boy.JumpAccel += game_framework.frame_time
         boy.frame = (boy.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 2
-        boy.y += ((-10.0) * boy.JumpAccel) * boy.JumpAccel
+        boy.y += ((-10.0) * boy.JumpAccel) * boy.JumpAccel - 1
         boy.x = clamp(25, boy.x, 1600 - 25)
         boy.JumpDuring -= 1
 
         if boy.JumpDuring <= 0.0:
             boy.JumpDuring = 0.0
             boy.JumpAccel = 0.0
-            boy.add_event(JUMP_TIMER)
+            #boy.add_event(JUMP_TIMER)
 
     def draw(boy):
         if boy.dir == 1:
@@ -193,7 +193,6 @@ next_state_table = {
 class Boy:
     def __init__(self):
         self.x, self.y = 1600 // 2, 90
-        # Boy is only once created, so instance image loading is fine
         self.image = load_image('mario_growth.png')
         self.font = load_font('ENCR10B.TTF', 16)
         self.dir = 1
@@ -233,3 +232,6 @@ class Boy:
             key_event = key_event_table[(event.type, event.key)]
             self.add_event(key_event)
 
+    def stop(self):
+        #self.add_event(JUMP_TIMER)
+        pass

@@ -75,8 +75,8 @@ def update():
         game_object.update()
 
     if collide(boy, grass):
+        #boy.stop()
         pass
-
 
     #delay(0.9)
 
