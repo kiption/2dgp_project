@@ -5,11 +5,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8b3ea97d-94cf-4b89-a568-234a4aaae0aa" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/2dgp_project.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/2dgp_project.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mario_left.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mario_right.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Stage 1-1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/animation_sheet.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ball.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ball21x21.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ball41x41.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bird100x100x14.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/boy.py" beforeDir="false" afterPath="$PROJECT_DIR$/boy.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/boys_team_1000.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/brick180x40.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collision.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/game_world.py" beforeDir="false" afterPath="$PROJECT_DIR$/game_world.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/globals.py" beforeDir="false" afterPath="$PROJECT_DIR$/globals.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/grass.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grass.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/main_state.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_state.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mario_fire.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mario_idle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mygame.py" beforeDir="false" afterPath="$PROJECT_DIR$/mygame.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stage1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_globals.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,7 +45,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../python" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunManager">
