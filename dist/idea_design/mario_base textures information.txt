@@ -1,0 +1,13 @@
+
+base
+(_7actions)
+
+size 32x32(px)
+
+idle 1
+walk 4
+run 6
+jump 1
+fall 1
+death 2 
+clear 5
