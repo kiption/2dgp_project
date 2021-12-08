@@ -3,6 +3,7 @@ from pico2d import *
 from ball import Ball
 import collision
 import game_world
+from grass import Grass
 
 # Boy Run Speed
 PIXEL_PER_METER = (10.0 / 0.3)  # 10 pixel 30 cm
@@ -28,7 +29,7 @@ key_event_table = {
     (SDL_KEYUP, SDLK_LEFT): LEFT_UP,
     (SDL_KEYDOWN, SDLK_SPACE): SPACE
 }
-
+grass = None
 
 # Boy States
 
@@ -83,7 +84,6 @@ class RunState:
         pass
 
     def do(boy):
-        #boy.frame = (boy.frame + 1) % 8
         boy.frame = (boy.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 4
         boy.x += boy.velocity * game_framework.frame_time
         boy.x = clamp(25, boy.x, 1600 - 25)
@@ -127,22 +127,19 @@ class JumpState:
         elif event == LEFT_UP:
             boy.dir = -1
             boy.velocity -= RUN_SPEED_PPS
-        #boy.dir = clamp(-1, boy.velocity, 1)
 
     def exit(boy, event):
         pass
 
     def do(boy):
-        #print(boy.JumpAccel)
         boy.JumpAccel += game_framework.frame_time
         boy.frame = (boy.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 2
         boy.x += boy.velocity * game_framework.frame_time
         boy.y += (boy.JumpPPS + (-10.0) * boy.JumpAccel) * boy.JumpAccel
-        boy.JumpDuring += 1
+        boy.JumpDuring += 0.5
         boy.x = clamp(25, boy.x, 1600 - 25)
         if boy.JumpDuring >= 20.0:
             boy.JumpAccel = 0.0
-            print('----', boy.JumpAccel)
             boy.add_event(JUMP_TIMER)
 
     def draw(boy):
@@ -167,12 +164,9 @@ class FallingState:
         boy.frame = (boy.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 2
         boy.y += ((-10.0) * boy.JumpAccel) * boy.JumpAccel - 1
         boy.x = clamp(25, boy.x, 1600 - 25)
-        boy.JumpDuring -= 1
+        boy.JumpDuring -= 0.1
 
-        if boy.JumpDuring <= 0.0:
-            boy.JumpDuring = 0.0
-            boy.JumpAccel = 0.0
-            #boy.add_event(JUMP_TIMER)
+
 
     def draw(boy):
         if boy.dir == 1:
@@ -182,12 +176,12 @@ class FallingState:
 
 next_state_table = {
     IdleState: {RIGHT_UP: RunState, LEFT_UP: RunState, RIGHT_DOWN: RunState, LEFT_DOWN: RunState, SLEEP_TIMER: SleepState, SPACE: JumpState},
-    RunState: {RIGHT_UP: IdleState, LEFT_UP: IdleState, LEFT_DOWN: IdleState, RIGHT_DOWN: IdleState, SPACE: RunState, SPACE: JumpState},
-    SleepState: {LEFT_DOWN: RunState, RIGHT_DOWN: RunState, LEFT_UP: RunState, RIGHT_UP: RunState, SPACE: IdleState, SPACE: JumpState},
-    JumpState: {SPACE: JumpState, RIGHT_UP: RunState, LEFT_UP: RunState,
-                RIGHT_DOWN: RunState, LEFT_DOWN: RunState, JUMP_TIMER: FallingState},
-    FallingState: {RIGHT_UP: IdleState, LEFT_UP: IdleState, RIGHT_DOWN: IdleState,
-                   LEFT_DOWN: IdleState, SPACE: FallingState, JUMP_TIMER: IdleState}
+    RunState: {RIGHT_UP: IdleState, LEFT_UP: IdleState, LEFT_DOWN: IdleState, RIGHT_DOWN: IdleState, SPACE: JumpState, JUMP_TIMER:FallingState},
+    SleepState: {LEFT_DOWN: RunState, RIGHT_DOWN: RunState, LEFT_UP: RunState, RIGHT_UP: RunState, SPACE: IdleState},
+    JumpState: {SPACE: JumpState, RIGHT_UP: JumpState, LEFT_UP: JumpState,
+                RIGHT_DOWN: JumpState, LEFT_DOWN: JumpState, JUMP_TIMER: FallingState},
+    FallingState: {RIGHT_UP: FallingState, LEFT_UP: FallingState, RIGHT_DOWN: FallingState,
+                   LEFT_DOWN: FallingState, SPACE: FallingState, JUMP_TIMER: IdleState}
 }
 
 class Boy:
@@ -205,7 +199,7 @@ class Boy:
         self.JumpDuring = 0.0
         self.JumpAccel = 0.0
     def get_bb(self):
-        return 0, 0, 0, 0
+        return self.x -16, self.y -16, self.x +16, self.y +16
 
     def fire_ball(self):
         ball = Ball(self.x, self.y, self.dir * RUN_SPEED_PPS * 10)
@@ -233,5 +227,7 @@ class Boy:
             self.add_event(key_event)
 
     def stop(self):
-        #self.add_event(JUMP_TIMER)
-        pass
+        if self.cur_state == FallingState:
+            self.add_event(JUMP_TIMER)
+            self.JumpDuring = 0.0
+            self.JumpAccel = 0.0
